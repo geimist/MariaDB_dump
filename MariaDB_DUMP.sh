@@ -2,8 +2,7 @@
 #####################################################################################
 #                                                                                   #
 #   MARIADB-BackUp                                                                  #
-#   v1.0.0 @ 2023-02-13                                                             #
-#   © 2023 by geimist                                                               #
+#   v1.1.0 @ 2023-02-13                                                             #
 #                                                                                   #
 #   source:                                                                         #
 #   https://stefankonarski.de/content/mysql-backup-fuer-jede-datenbank-eine-datei   #
