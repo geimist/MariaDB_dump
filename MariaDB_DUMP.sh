@@ -86,6 +86,13 @@ echo "    saved DB's:     $DBCOUNT"
 echo "    skiped DB's:    $SKIPDBCOUNT"
 
 # Und zum Schluss noch ein Gesamtbackup:
+    if [ "$useSubDir" = true ]; then
+        BACKUPDIR="${BACKUPDIR}/GESAMT"
+        if [ ! -d "${BACKUPDIR}" ]; then
+            mkdir -p "${BACKUPDIR}"
+        fi
+    fi
+
     $mysqldump --opt $DBLOGIN --all-databases | gzip -c -9 > ${BACKUPDIR}/MySQLdump_GESAMTBACKUP_${DATE}.gz
 
 # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://git.geimist.eu/geimist/archive_rotate
