@@ -8,6 +8,9 @@
 # Sicherungsverzeichenis:
     BACKUPDIR="/volume1/system/DS_BackUps/MariaDB_DUMP"
 
+# ein Unterverzeichnis für jede DB nutzen? (true = ja / alles andere = nein)
+    useSubDir=true
+
 # Datumsformat:
     DATE=$(date +%Y-%m-%d_%H-%M-%S)
     DBengine="/var/packages/MariaDB10/target/usr/local/mariadb10/bin/mysql"
@@ -57,7 +60,14 @@ for db in $DBlist ; do
     fi
  
     DBCOUNT=$(($DBCOUNT + 1))
-    
+
+    if [ "$useSubDir" = true ]; then
+        BACKUPDIR="${BACKUPDIR}/${db}"
+        if [ ! -d "${BACKUPDIR}" ]; then
+            mkdir -p "${BACKUPDIR}"
+        fi
+    fi
+
     fn="${BACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
 
     echo "Dump database $db to ${fn}"
