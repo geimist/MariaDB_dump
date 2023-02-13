@@ -10,7 +10,6 @@
 
 # Datumsformat:
     DATE=$(date +%Y-%m-%d_%H-%M-%S)
-    PREFIX="MySQLdump_${DATE}_"
     DBengine="/var/packages/MariaDB10/target/usr/local/mariadb10/bin/mysql"
 
     mysqldump="/usr/local/mariadb10/bin/mysqldump"
@@ -59,10 +58,11 @@ for db in $DBlist ; do
  
     DBCOUNT=$(($DBCOUNT + 1))
     
-    fn="${BACKUPDIR}/${prefix}${db}.sql"
-    echo "Dump database $db to $fn"
+    fn="${BACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
+
+    echo "Dump database $db to "${fn}.gz""
     
-    $mysqldump $DBLOGIN --databases $db | gzip -c -9 > "${BACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
+    $mysqldump $DBLOGIN --databases $db | gzip -c -9 > "${fn}"
 
 # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://git.geimist.eu/geimist/archive_rotate
 #   /volume1/Pfad_zu/archive_rotate.sh -vc -p="${BACKUPDIR}" -s=MySQLdump_${db}* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
