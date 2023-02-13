@@ -1,7 +1,6 @@
 #!/bin/bash
 # MARIADB-BackUp
 # https://stefankonarski.de/content/mysql-backup-fuer-jede-datenbank-eine-datei
-# /volume1/homes/admin/script/MariaDB_DUMP.sh
 
 # MySQL-Rootkennwort:
     MYSQLPW="GanzSicherMariaDB_PW"
