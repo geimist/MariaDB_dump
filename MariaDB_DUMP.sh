@@ -42,20 +42,18 @@ else
     DBLOGIN="-u root -p$MYSQLPW"
 fi
 
-
 DBlist="$($DBengine $DBLOGIN -Bse 'show databases')"
-# List for compressing files
-FILE2COMPRESS=
+
 DBCOUNT=0
 SKIPDBCOUNT=0
 
-# Loop over all databases
+# Schleife über alle Datenbanken:
 for db in $DBlist ; do
-    # Don't skip any database as default
+    # überspringe keine Datenbank als Standardwert:
     skipdb=0
-    # If excludable databases are defined
+    # Wenn ausgeschlossene Datenbanken definiert sind:
     if [ "$ExDB" != "" ]; then
-        # Loop over excludable databases
+        # Loop über die ausgeschlossenen Datenbanken und ggf. Flag setzen:
         for n in $ExDB; do
             if [ "$db" = "$n" ]; then
                 skipdb=1
