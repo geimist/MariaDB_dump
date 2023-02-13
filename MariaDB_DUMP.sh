@@ -60,7 +60,7 @@ for db in $DBlist ; do
     
     fn="${BACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
 
-    echo "Dump database $db to "${fn}.gz""
+    echo "Dump database $db to ${fn}"
     
     $mysqldump $DBLOGIN --databases $db | gzip -c -9 > "${fn}"
 
