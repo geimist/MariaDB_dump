@@ -10,10 +10,9 @@
 
 # Datumsformat:
     DATE=$(date +%Y-%m-%d_%H-%M-%S)
-    PREFIX="MySQLdump_$(date +'%Y-%m-%d_%H-%M-%S')_"
-    DBengine=/volume*/@appstore/MariaDB10/usr/local/mariadb10/bin/mysql
+    PREFIX="MySQLdump_${DATE}_"
+    DBengine=/var/packages/MariaDB10/target/usr/local/mariadb10/bin/mysql
 
-#   mysqldump="/volume1/@appstore/MariaDB10/usr/local/mariadb10/bin/mysqldump"
     mysqldump="/usr/local/mariadb10/bin/mysqldump"
 
 # Exclude the following databases
