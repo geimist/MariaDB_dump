@@ -24,8 +24,9 @@
 
 # -----------------------------------------------------
 
-# ggf. abschließenden Slash entfernen:
+# ggf. abschließenden Slash entfernen und Ordner ggf. erstellen:
 BACKUPDIR="${BACKUPDIR%/}"
+[ ! -d "${BACKUPDIR}" ] && mkdir -p "${BACKUPDIR}"
 
 if [ "" = "$MYSQLPW" ]; then
     echo "Login ohne Passwort"
@@ -64,21 +65,22 @@ for db in $DBlist ; do
  
     DBCOUNT=$(($DBCOUNT + 1))
 
+    modBACKUPDIR="${BACKUPDIR}"
     if [ "$useSubDir" = true ]; then
-        BACKUPDIR="${BACKUPDIR}/${db}"
-        if [ ! -d "${BACKUPDIR}" ]; then
-            mkdir -p "${BACKUPDIR}"
-        fi
+        modBACKUPDIR="${BACKUPDIR}/${db}"
+        if [ ! -d "${modBACKUPDIR}" ]; then
+            mkdir -p "${modBACKUPDIR}"
+        fi        
     fi
 
-    fn="${BACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
+    fn="${modBACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
 
     echo "Dump database $db to ${fn}"
     
     $mysqldump $DBLOGIN --databases $db | gzip -c -9 > "${fn}"
 
 # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://git.geimist.eu/geimist/archive_rotate
-#   /volume1/Pfad_zu/archive_rotate.sh -vc -p="${BACKUPDIR}" -s=MySQLdump_${db}* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
+#   /volume1/Pfad_zu/archive_rotate.sh -vc -p="${modBACKUPDIR}" -s=MySQLdump_${db}* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
 done
 
 echo -e
@@ -86,14 +88,15 @@ echo "    saved DB's:     $DBCOUNT"
 echo "    skiped DB's:    $SKIPDBCOUNT"
 
 # Und zum Schluss noch ein Gesamtbackup:
+    modBACKUPDIR="${BACKUPDIR}"
     if [ "$useSubDir" = true ]; then
-        BACKUPDIR="${BACKUPDIR}/GESAMT"
-        if [ ! -d "${BACKUPDIR}" ]; then
-            mkdir -p "${BACKUPDIR}"
+        modBACKUPDIR="${BACKUPDIR}/GESAMT"
+        if [ ! -d "${modBACKUPDIR}" ]; then
+            mkdir -p "${modBACKUPDIR}"
         fi
     fi
 
-    $mysqldump --opt $DBLOGIN --all-databases | gzip -c -9 > ${BACKUPDIR}/MySQLdump_GESAMTBACKUP_${DATE}.gz
+    $mysqldump --opt $DBLOGIN --all-databases | gzip -c -9 > ${modBACKUPDIR}/MySQLdump_GESAMTBACKUP_${DATE}.gz
 
 # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://git.geimist.eu/geimist/archive_rotate
 #   /volume1/Pfad_zu/archive_rotate.sh -vc -p="${BACKUPDIR}" -s=MySQLdump_GESAMTBACKUP_* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
