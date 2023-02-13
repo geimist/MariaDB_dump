@@ -11,18 +11,21 @@
 # ein Unterverzeichnis für jede DB nutzen? (true = ja / alles andere = nein)
     useSubDir=true
 
-# Datumsformat:
+# Datumsformat für Dateiname:
     DATE=$(date +%Y-%m-%d_%H-%M-%S)
-    DBengine="/var/packages/MariaDB10/target/usr/local/mariadb10/bin/mysql"
 
+# Programmpfade:
+    DBengine="/var/packages/MariaDB10/target/usr/local/mariadb10/bin/mysql"
     mysqldump="/usr/local/mariadb10/bin/mysqldump"
 
-# Exclude the following databases
+# auszuschließende Datenbanken:
     ExDB="phpmyadmin information_schema performance_schema"
 
 
 # -----------------------------------------------------
 
+# ggf. abschließenden Slash entfernen:
+BACKUPDIR="${BACKUPDIR%/}"
 
 if [ "" = "$MYSQLPW" ]; then
     echo "Login ohne Passwort"
