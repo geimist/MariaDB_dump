@@ -1,6 +1,14 @@
 #!/bin/bash
-# MARIADB-BackUp
-# https://stefankonarski.de/content/mysql-backup-fuer-jede-datenbank-eine-datei
+#####################################################################################
+#                                                                                   #
+#   MARIADB-BackUp                                                                  #
+#   v1.0.0 @ 2023-02-13                                                             #
+#   © 2023 by geimist                                                               #
+#                                                                                   #
+#   source:                                                                         #
+#   https://stefankonarski.de/content/mysql-backup-fuer-jede-datenbank-eine-datei   #
+#                                                                                   #
+#####################################################################################
 
 # MySQL-Rootkennwort:
     MYSQLPW="GanzSicherMariaDB_PW"
@@ -58,7 +66,7 @@ for db in $DBlist ; do
     fi
  
     if [ "$skipdb" = "1" ] ; then
-        echo "Skip database $db"
+        echo "überspringe Datenbank $db"
         SKIPDBCOUNT=$(($SKIPDBCOUNT + 1))
         continue
     fi
@@ -75,7 +83,7 @@ for db in $DBlist ; do
 
     fn="${modBACKUPDIR}/MySQLdump_${db}_${DATE}.sql.gz"
 
-    echo "Dump database $db to ${fn}"
+    echo "Dump Datenbank $db nach ${fn}"
     
     $mysqldump $DBLOGIN --databases $db | gzip -c -9 > "${fn}"
 
@@ -84,8 +92,8 @@ for db in $DBlist ; do
 done
 
 echo -e
-echo "    saved DB's:     $DBCOUNT"
-echo "    skiped DB's:    $SKIPDBCOUNT"
+echo "    gesicherte DB's:      $DBCOUNT"
+echo "    übersprungene DB's:   $SKIPDBCOUNT"
 
 # Und zum Schluss noch ein Gesamtbackup:
     modBACKUPDIR="${BACKUPDIR}"
