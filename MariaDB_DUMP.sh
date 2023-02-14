@@ -94,7 +94,7 @@ for db in $DBlist ; do
     sleep 1
 
 # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://git.geimist.eu/geimist/archive_rotate
-#    /volume1/homes/admin/script/_funktionen/archive_rotate.sh -vc -p="${modBACKUPDIR}" -s=MySQLdump_${db}* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
+#    /volume1/Pfad_zu/archive_rotate.sh -vc -p="${modBACKUPDIR}" -s=MySQLdump_${db}* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
 done
 
 # Und zum Schluss noch ein Gesamtbackup:
@@ -113,7 +113,7 @@ done
         sleep 1
 
     # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://git.geimist.eu/geimist/archive_rotate
-#        /volume1/homes/admin/script/_funktionen/archive_rotate.sh -vc -p="${modBACKUPDIR}" -s=MySQLdump_GESAMTBACKUP_* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
+#        /volume1/Pfad_zu/archive_rotate.sh -vc -p="${modBACKUPDIR}" -s=MySQLdump_GESAMTBACKUP_* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
     fi
 
 echo -e
