@@ -23,7 +23,7 @@
 # Konfigurationsdatei:
 ENV_CONFIG="$1"
 if [ -z "$ENV_CONFIG" ]; then
-    ENV_CONFIG="./cnf/config.cnf"
+    ENV_CONFIG="../cnf/config.cnf"
 fi
 
 if [ ! -f "$ENV_CONFIG" ]; then
