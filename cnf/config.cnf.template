@@ -20,8 +20,11 @@
     DBengine="$(which mysql)"
     mysqldump="$(which mysqldump)"
 
+# auszuschließende Datenbanken:
+    ExDB="mysql sys phpmyadmin information_schema performance_schema"
+
 # Archive rotieren? (true = ja / alles andere = nein)
-# Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://github.com/geimist/archive_rotate
+    # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://github.com/geimist/archive_rotate
     Rotate=true
     # Pfad zum Archivrotations-Script:
     ScriptRotate="/volume1/Pfad_zu/archive_rotate.sh"
@@ -31,6 +34,3 @@
     WEEKS="7x4"
     MONTHS="4x6"
     YEARS="4x1"
-
-# auszuschließende Datenbanken:
-    ExDB="mysql sys phpmyadmin information_schema performance_schema"
