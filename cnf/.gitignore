@@ -1,2 +1,6 @@
+# Ignore all files in this directory
 *
+# Except the .gitignore file itself
 !.gitignore
+# except the template
+!config.cnf.template

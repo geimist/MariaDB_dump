@@ -1,0 +1,30 @@
+#!/bin/bash
+# shellcheck disable=SC2034
+
+# MySQL-Rootkennwort:
+    MYSQLPW="GanzSicherMariaDB_PW"
+
+# Sicherungsverzeichenis:
+    BACKUPDIR="/volume1/system/DS_BackUps/MariaDB_DUMP_test"
+
+# ein Unterverzeichnis für jede DB nutzen? (true = ja / alles andere = nein)
+    useSubDir=true
+
+# auch ein Gesamtbackup anlegen? (true = ja / alles andere = nein)
+    DumpAll=true
+
+# Datumsformat für Dateiname:
+    DATE=$(date +%Y-%m-%d_%H-%M-%S)
+
+# Programmpfade:
+    DBengine="$(which mysql)"
+    mysqldump="$(which mysqldump)"
+
+# Archive rotieren? (true = ja / alles andere = nein)
+# Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://github.com/geimist/archive_rotate
+    Rotate=true
+    # Pfad zum Archivrotations-Script:
+    ScriptRotate="/volume1/Pfad_zu/archive_rotate.sh"
+
+# auszuschließende Datenbanken:
+    ExDB="mysql sys phpmyadmin information_schema performance_schema"
