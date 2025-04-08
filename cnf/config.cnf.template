@@ -25,6 +25,12 @@
     Rotate=true
     # Pfad zum Archivrotations-Script:
     ScriptRotate="/volume1/Pfad_zu/archive_rotate.sh"
+    # Parameter für die Rotation:
+    HOURS="1x4"
+    DAYS="24x7"
+    WEEKS="7x4"
+    MONTHS="4x6"
+    YEARS="4x1"
 
 # auszuschließende Datenbanken:
     ExDB="mysql sys phpmyadmin information_schema performance_schema"

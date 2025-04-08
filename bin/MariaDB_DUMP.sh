@@ -107,7 +107,7 @@ for db in $DBlist ; do
     if [ "$Rotate" = true ]; then
         echo "Start Rotation of Dumps..."
         # shellcheck disable=SC2154
-        "${ScriptRotate}" -vc -p="${modBACKUPDIR}" -s=MySQLdump_"${db}"_* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
+        "${ScriptRotate}" -vc -p="${modBACKUPDIR}" -s=MySQLdump_"${db}"_* -h="$HOURS" -d="$DAYS" -w="$WEEKS" -m="$MONTHS" -y="$YEARS"
     fi
 done
 
@@ -140,7 +140,7 @@ if [ "$DumpAll" = true ]; then
     # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://github.com/geimist/archive_rotate
     if [ "$Rotate" = true ]; then
         echo "Start Rotation of Dumps..."
-        "${ScriptRotate}" -vc -p="${modBACKUPDIR}" -s=MySQLdump_GESAMTBACKUP_* -h=1x4 -d=24x7 -w=7x4 -m=4x6 -y=4x*
+        "${ScriptRotate}" -vc -p="${modBACKUPDIR}" -s=MySQLdump_GESAMTBACKUP_* -h="$HOURS" -d="$DAYS" -w="$WEEKS" -m="$MONTHS" -y="$YEARS"
     fi
 fi
 
