@@ -83,7 +83,7 @@ for db in $DBlist ; do
 
     # Prüfen ob die Datenbank übersprungen werden soll:
     if [ "$skipdb" = "1" ] ; then
-        echo "überspringe Datenbank $db"
+        echo "Überspringe Datenbank: \"$db\""
         # Datenbank überspringen und in die Liste der übersprungenen Datenbanken eintragen:
         SKIPPED_DBS+=("$db")
         # Zähler der übersprungenen Datenbanken erhöhen:
@@ -174,7 +174,6 @@ if [ "$DumpAll" = true ]; then
     fi
     sleep 1
 
-
     # Rotation, sofern man das Skript "archive_rotate" von hier verwendet: https://github.com/geimist/archive_rotate
     if [ "$Rotate" = true ]; then
         echo echo "Starte Rotation der Abbilder der GESAMT-Datenbank..."
@@ -189,9 +188,40 @@ if [ "$DumpAll" = true ]; then
 fi
 
 # Ausgabe der Ergebnisse:
-printf "\n%-30s %-30s\n" "Anzahl gesicherter DB's:" "$DBCOUNT"
-printf "%-30s %-30s\n" "Liste der gesicherten DB's:" "$(IFS=,; echo "${DUMPED_DBS[*]}")"
-printf "%-30s %-30s\n" "Anzahl übersprungener DB's:" "$SKIPDBCOUNT"
-printf "%-30s %-30s\n" "Liste der übersprungenen DB's:" "$(IFS=,; echo "${SKIPPED_DBS[*]}")"
+printf "\n\nResultate der Sicherung:\n"
+printf -- "------------------------\n"
+
+# Anzahl und Liste der gesicherten Datenbanken:
+printf "%s %s\n" "" "Gesicherte DB's"
+printf "%s %s %s\n" "" "Anzahl:" "$DBCOUNT"
+if [ -z "${DUMPED_DBS[*]}" ]; then
+    printf "%s %s\n" "" "Keine Datenbanken gesichert."
+else
+    printf "%s %s\n" "" "Datenbanken:"
+    for i in "${!DUMPED_DBS[@]}"; do
+        if [[ "${DUMPED_DBS[i]}" == *" "* ]]; then
+            printf "%s %s %2d.) \"%s\"\n" "" "" "$((i+1))" "${DUMPED_DBS[i]}"
+        else
+            printf "%s %s %2d.) %s\n" "" "" "$((i+1))" "${DUMPED_DBS[i]}"
+        fi
+    done
+fi
+
+# Anzahl und Liste der übersprungenen Datenbanken:
+printf "\n"
+printf "%s %s\n" "" "Übersprungene DB's"
+printf "%s %s %s\n" "" "Anzahl:" "$SKIPDBCOUNT"
+if [ -z "${SKIPPED_DBS[*]}" ]; then
+    printf "%s %s\n" "" "Keine Datenbanken übersprungen."
+else
+    printf "%s %s\n" "" "Datenbanken:"
+    for i in "${!SKIPPED_DBS[@]}"; do
+        if [[ "${SKIPPED_DBS[i]}" == *" "* ]]; then
+            printf "%s %s %2d.) \"%s\"\n" "" "" "$((i+1))" "${SKIPPED_DBS[i]}"
+        else
+            printf "%s %s %2d.) %s\n" "" "" "$((i+1))" "${SKIPPED_DBS[i]}"
+        fi
+    done
+fi
 
 exit 0
