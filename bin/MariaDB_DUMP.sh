@@ -19,11 +19,12 @@
 
 # Variablen
 # Umgebungsvariablen
+SPATH=$(dirname "$0")
 
 # Konfigurationsdatei:
 ENV_CONFIG="$1"
 if [ -z "$ENV_CONFIG" ]; then
-    ENV_CONFIG="../cnf/config.cnf"
+    ENV_CONFIG="${SPATH}/../cnf/config.cnf"
 fi
 
 if [ ! -f "$ENV_CONFIG" ]; then
