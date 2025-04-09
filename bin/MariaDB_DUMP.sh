@@ -119,7 +119,7 @@ for db in $DBlist ; do
         echo "Fehler beim Erzeugen eines Dumps der Datenbank $db"
         exit $retcode
     else
-        echo "Dump der Datenbank $db erfolgreich"
+        echo "Dump der Datenbank \"$db\" erfolgreich"
         # dump erfolgreich, also in die Liste der gesicherten Datenbanken eintragen:
         DUMPED_DBS+=("$db")
         # Zähler der gesicherten Datenbanken erhöhen:

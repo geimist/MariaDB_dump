@@ -196,7 +196,7 @@ Login ohne Passwort
 
 Dump Datenbank Test_Datenbank nach /volume2/backup/MariaDB_DUMP/Test_Datenbank/MySQLdump_Test_Datenbank_2025-04-08_22-35-26.sql.gz
 
-Dump der Datenbank Test_Datenbank erfolgreich
+Dump der Datenbank "Test_Datenbank" erfolgreich
 Überspringe Datenbank: "information_schema"
 Überspringe Datenbank: "mysql"
 Überspringe Datenbank: "performance_schema"
